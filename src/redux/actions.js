@@ -1,15 +1,16 @@
+import types from './types';
+
 export const addContact = payload => ({
-  type: 'contacts/addContact',
-  //   payload: { name: 'John', number: '777-777-77', id: 'id' },
+  type: types.ADD,
   payload,
 });
 
 export const deleteContact = payload => ({
-  type: 'contacts/deleteContact',
+  type: types.DELETE,
   payload,
 });
 
 export const filterContacts = payload => ({
-  type: 'contacts/filter',
+  type: types.FILTER,
   payload,
 });

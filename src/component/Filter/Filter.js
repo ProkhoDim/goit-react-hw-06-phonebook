@@ -1,24 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { v4 as uuidv4 } from 'uuid';
-import styles from './Filter.module.css';
 import { filterContacts } from '../../redux/actions';
 import { connect } from 'react-redux';
+import Input from '../Input';
 
 const Filter = ({ filter, onChange }) => {
-  const filterInputId = uuidv4();
   return (
     <>
-      <label htmlFor={filterInputId} className={styles.labelFilter}>
-        Find contacts by name
-      </label>
-      <input
-        id={filterInputId}
-        type="input"
+      <Input
         name="filter"
-        onChange={onChange}
+        text="find contacts by name"
         value={filter}
-        className={styles.inputFilter}
+        onChange={onChange}
       />
     </>
   );
