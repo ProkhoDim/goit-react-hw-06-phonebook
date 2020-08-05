@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styles from './ContactForm.module.css';
 import { v4 as uuidv4 } from 'uuid';
-import { connect } from 'react-redux';
-import { addContact } from '../../redux/actions';
+// import { connect } from 'react-redux';
+// import { addContact } from '../../redux/actions';
 
 class ContactForm extends Component {
   state = {

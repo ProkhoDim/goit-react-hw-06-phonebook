@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './global.css';
 
 import ContactForm from './component/ContactForm';
 import Filter from './component/Filter';
 import ContactList from './component/ContactList';
 import { connect } from 'react-redux';
-import { addContact, deleteContact } from './redux/actions';
+import { addContact, deleteContact, filterContacts } from './redux/actions';
 
-const LOCAL_STOR_KEY = 'contacts';
+// const LOCAL_STOR_KEY = 'contacts';
 
 // class App extends Component {
 //   // state = {
@@ -97,7 +97,7 @@ const LOCAL_STOR_KEY = 'contacts';
 //   }
 // }
 
-const App = ({ contactList, filter, onSubmit, deleteContact }) => {
+const App = ({ contactList, onSubmit, deleteContact }) => {
   return (
     <>
       <section>
@@ -106,6 +106,7 @@ const App = ({ contactList, filter, onSubmit, deleteContact }) => {
       </section>
       <section>
         {contactList.length > 0 && <h2>Contacts</h2>}
+        {contactList.length > 3 && <Filter />}
         {contactList.length > 0 && (
           <ContactList contacts={contactList} onDeleteContact={deleteContact} />
         )}
@@ -117,7 +118,6 @@ const App = ({ contactList, filter, onSubmit, deleteContact }) => {
 const mapStateToProps = state => {
   return {
     contactList: state.contacts.items,
-    filter: '',
   };
 };
 

@@ -1,4 +1,6 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
+import items from '';
+import filter from '';
 
 const initialState = {
   contacts: {
@@ -14,16 +16,27 @@ const initialState = {
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case 'contactForm/addContact':
+    case 'contacts/addContact':
       return {
         contacts: {
           items: [...state.contacts.items, payload],
+          filter: state.contacts.filter,
         },
       };
-    case 'contactForm/deleteContact':
+    case 'contacts/deleteContact':
       return {
         contacts: {
           items: state.contacts.items.filter(({ id }) => id !== payload),
+          filter: state.contacts.filter,
+        },
+      };
+    case 'contacts/filter':
+      console.log('payload', payload);
+      console.log('state', state);
+      return {
+        contacts: {
+          items: state.contacts.items,
+          filter: payload,
         },
       };
 
@@ -32,6 +45,11 @@ const reducer = (state = initialState, { type, payload }) => {
   }
 };
 
-const store = createStore(reducer);
+const rootReducer = combineReducers({
+  items,
+  filter,
+});
+
+const store = createStore(rootReducer);
 
 export default store;
