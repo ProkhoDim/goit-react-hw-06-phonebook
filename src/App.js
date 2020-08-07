@@ -1,32 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './global.css';
 
 import ContactForm from './component/ContactForm';
 import Filter from './component/Filter';
 import ContactList from './component/ContactList';
-import { connect } from 'react-redux';
-
-// const LOCAL_STOR_KEY = 'contacts';
-
-//   componentDidMount() {
-//     // if (this.getContacts() > 0) {
-//     //   this.setState({ contacts: this.getContacts() });
-//     // }
-//   }
-
-//   // componentDidUpdate(prevProps, prevState) {
-//   //   if (prevState.contacts !== this.state.contacts) {
-//   //     localStorage.setItem(
-//   //       LOCAL_STOR_KEY,
-//   //       JSON.stringify([...this.state.contacts]),
-//   //     );
-//   //   }
-//   // }
-
-//   getContacts = () => {
-//     const data = localStorage.getItem(LOCAL_STOR_KEY);
-//     return JSON.parse(data);
-//   };
 
 const App = ({ contactList }) => {
   return (
