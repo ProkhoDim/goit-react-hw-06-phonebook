@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import actions from '../../redux/contacts/contacts-actions';
-import Input from '../Input';
+import Input from '../../common/Input';
 
 const Filter = ({ filter, onChange }) => {
   return (

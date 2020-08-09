@@ -1,9 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 import styles from './ContactForm.module.css';
 
 import actions from '../../redux/contacts/contacts-actions';
-import Input from '../Input';
+import Input from '../../common/Input';
+
+const errorNotification = (text, closeDelay) =>
+  toast.error(text, {
+    position: 'top-center',
+    autoClose: closeDelay,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+
+const normilizedNumber = number => number.split(/\D/).join('');
 
 class ContactForm extends Component {
   state = {
@@ -17,26 +33,31 @@ class ContactForm extends Component {
     const { name, number } = this.state;
     const { contactList, onSubmit } = this.props;
 
-    if (!name) {
-      alert(`Please, enter a name!`);
+    if (!name || !number) {
+      errorNotification(`Please, enter name and number!`);
       return;
     }
 
-    if (!this.isContactInContactList(contactList, name)) {
+    if (!this.isContactExist(contactList, name)) {
       onSubmit({ name, number });
       this.formReset();
     }
   };
 
   handleChange = ({ target: { name, value } }) => {
-    this.setState({ [name]: value });
+    if (name !== 'number') {
+      this.setState({ [name]: value });
+      return;
+    }
+
+    this.setState({ [name]: normilizedNumber(value) });
   };
 
   formReset = () => {
     this.setState({ name: '', number: '' });
   };
 
-  isContactInContactList = (contacts, submitName) => {
+  isContactExist = (contacts, submitName) => {
     const isNameInContacts = contacts.some(({ name }) => submitName === name);
 
     if (!isNameInContacts) return false;
@@ -65,6 +86,7 @@ class ContactForm extends Component {
         <button type="submit" className={styles.formBtn}>
           Add contact
         </button>
+        <ToastContainer />
       </form>
     );
   }
