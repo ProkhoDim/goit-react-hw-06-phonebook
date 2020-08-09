@@ -8,9 +8,9 @@ import styles from './ContactForm.module.css';
 import actions from '../../redux/contacts/contacts-actions';
 import Input from '../../common/Input';
 
-const errorNotification = (text, closeDelay) =>
+const errorNotification = (text, closeDelay = 1500) =>
   toast.error(text, {
-    position: 'top-center',
+    position: 'top-right',
     autoClose: closeDelay,
     hideProgressBar: true,
     closeOnClick: true,
@@ -62,7 +62,7 @@ class ContactForm extends Component {
 
     if (!isNameInContacts) return false;
 
-    alert(`${submitName} is already in contacts`);
+    errorNotification(`${submitName} is already in contacts`);
     return true;
   };
 
